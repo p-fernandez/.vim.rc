@@ -158,10 +158,10 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_stl_format = '[%E{E:%e(#%fe)}%B{,}%W{W:%w(#%fw)}]'
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️ '
+let g:syntastic_error_symbol = '⛔️'
+let g:syntastic_style_error_symbol = '🚫'
 let g:syntastic_warning_symbol = '⚠️ '
-let g:syntastic_style_warning_symbol = '💩'
+let g:syntastic_style_warning_symbol = '🚸'
 
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
@@ -187,6 +187,8 @@ let g:syntastic_html_checkers = ['w3']
 " COLORSCHEME "
 """""""""""""""
 
+" Set vim to 256 colors
+set t_Co=256
 colorscheme afterglow
 
 
