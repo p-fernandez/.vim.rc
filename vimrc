@@ -1,10 +1,14 @@
+" COLORSCHEME "
+"""""""""""""""
+
+set t_Co=256
+colorscheme afterglow
+" Search color highlighting
+set hlsearch
+
+
 " GENERAL "
 """""""""""
-
-" When started as 'evim', evim.vim will already have done these settings
-if v:progname =~? "evim"
-  finish
-endif
 
 set encoding=utf-8
 set nocompatible
@@ -91,20 +95,19 @@ endif
 set undodir=~/.vim/undodir
 set undofile
 
-" Switch syntax highlighting on, when the terminal has colors
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
 
+
+" PATHOGEN "
+""""""""""""
+
+execute pathogen#infect()
 
 
 " PLUG "
@@ -123,74 +126,60 @@ Plug 'fleischie/vim-styled-components', { 'for': 'javascript' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'airblade/vim-gitgutter'
 Plug 'brooth/far.vim'
+Plug 'w0rp/ale'
 
 " Initialize plugin system
 call plug#end()
-
-
-
-" PATHOGEN "
-""""""""""""
-
-execute pathogen#infect()
-
 
 
 " AIRLINE "
 """""""""""
 
 set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_skip_empty_sections = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
+hi airline_c ctermfg=white ctermbg=234
+hi airline_c_bold term=bold ctermfg=white ctermbg=234
+hi airline_x ctermfg=white ctermbg=234
+hi airline_x_bold term=bold ctermfg=white ctermbg=234
+hi airline_tabfill ctermfg=white ctermbg=234
+hi airline_tabhid ctermfg=white ctermbg=234
+hi airline_tabhid_right ctermfg=white ctermbg=234
+" Integration with ALE
+let airline#extensions#ale#error_symbol = ' ✕ -> '
+let airline#extensions#ale#warning_symbol = ' ▵ -> '
+let airline#extensions#ale#open_lnum_symbol = ' ['
+let airline#extensions#ale#close_lnum_symbol = '] '
+" Highlighting search
+hi Search term=bold ctermbg=22 ctermfg=white
+hi Error term=reverse ctermbg=52 ctermfg=white
 
-
-" SYNTASTIC "
+" ALE "
 """""""""""""
 
-set statusline+=%{SyntasticStatuslineFlag()}
-
-" let g:syntastic_debug = 3
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1 
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_enable_balloons = 1
-let g:syntastic_stl_format = '[%E{E:%e(#%fe)}%B{,}%W{W:%w(#%fw)}]'
-let g:syntastic_error_symbol = '⛔️'
-let g:syntastic_style_error_symbol = '🚫'
-let g:syntastic_warning_symbol = '⚠️ '
-let g:syntastic_style_warning_symbol = '🚸'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
-" JSX
-let g:jsx_ext_required = 0
-
-" Javascript
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-let g:syntastic_javascript_checkers = ['eslint']
-
-" Others checkers
-let g:syntastic_typescript_checkers = ['tslint', 'tsc', 'eslint']
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-let g:syntastic_css_checkers = ['csslint', 'stylelint']
-let g:syntastic_scss_checkers = ['csslint', 'stylelint']
-let g:syntastic_html_checkers = ['w3']
-
-
-
-" COLORSCHEME "
-"""""""""""""""
-
-" Set vim to 256 colors
-set t_Co=256
-colorscheme afterglow
-
+" List of errors open inside Airline extension (bottom) showing up to 3 at the
+" same time
+let g:ale_open_list = 1
+let g:ale_set_quickfix = 0
+let g:ale_list_window_size = 3
+" Delay the checking
+let g:ale_lint_delay = 500
+" Left column closed when no errors
+let g:ale_sign_column_always = 0
+" Highlights
+let g:ale_set_highlights = 1
+highlight ALEErrorLine ctermbg=52 ctermfg=white
+highlight ALEErrorSign ctermbg=52 ctermfg=white
+highlight ALEError ctermbg=88 ctermfg=white
+highlight ALEWarningLine ctermbg=178 ctermfg=black
+highlight ALEWarningSign ctermbg=178 ctermfg=black
+highlight ALEWarning ctermbg=220 ctermfg=black
+" Signs
+let g:ale_sign_error = '✕'
+let g:ale_sign_warning = '▵'
 
 
 " INDENT "
