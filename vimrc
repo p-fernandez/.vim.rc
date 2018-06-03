@@ -14,6 +14,9 @@ set encoding=utf-8
 set nocompatible
 set nonumber
 
+" Folding via syntax is used for this filetype.
+set foldmethod=syntax
+
 " Convert tab into spaces
 set tabstop=2 shiftwidth=2 expandtab
 
@@ -133,6 +136,8 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'airblade/vim-gitgutter'
 Plug 'brooth/far.vim'
 Plug 'w0rp/ale'
+Plug 'elzr/vim-json'
+Plug 'tpope/vim-jdaddy'
 
 " Initialize plugin system
 call plug#end()
@@ -186,6 +191,29 @@ highlight ALEWarning ctermbg=220 ctermfg=black
 " Signs
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
+
+
+" VIM-JSON "
+""""""""""""
+
+" Disable fancy concealing of attribute quotes.
+let g:vim_json_syntax_conceal = 0
+
+
+" VIM-JDADDY "
+""""""""""""""
+
+function! JsonParse ()
+  call feedkeys("gqaj")  
+endfunction
+
+command! JsonParse call JsonParse()
+
+function! JsonStringify ()
+  call feedkeys("gsj")  
+endfunction
+
+command! JsonStringify call JsonStringify()
 
 
 " INDENT "
