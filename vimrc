@@ -16,6 +16,7 @@ set nonumber
 
 " Folding via syntax is used for this filetype.
 set foldmethod=syntax
+set foldlevelstart=4
 
 " Convert tab into spaces
 set tabstop=2 shiftwidth=2 expandtab
@@ -137,7 +138,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'brooth/far.vim'
 Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
-Plug 'tpope/vim-jdaddy'
+Plug 'p-fernandez/vim-jdaddy'
 
 " Initialize plugin system
 call plug#end()
@@ -177,7 +178,7 @@ let g:ale_open_list = 1
 let g:ale_set_quickfix = 0
 let g:ale_list_window_size = 3
 " Delay the checking
-let g:ale_lint_delay = 500
+let g:ale_lint_delay = 1000
 " Left column closed when no errors
 let g:ale_sign_column_always = 0
 " Highlights
@@ -192,6 +193,9 @@ highlight ALEWarning ctermbg=220 ctermfg=black
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
 
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fix_on_save = 0
 
 " VIM-JSON "
 """"""""""""
