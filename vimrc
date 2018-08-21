@@ -12,11 +12,14 @@ set hlsearch
 
 set encoding=utf-8
 set nocompatible
-set nonumber
+set number
 
 " Folding via syntax is used for this filetype.
 set foldmethod=syntax
-set foldlevelstart=4
+set foldlevelstart=5
+
+" Performance because of ALE
+set lazyredraw
 
 " Convert tab into spaces
 set tabstop=2 shiftwidth=2 expandtab
@@ -99,7 +102,6 @@ endif
 set undodir=~/.vim/undodir
 set undofile
 
-
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -169,6 +171,7 @@ let airline#extensions#ale#close_lnum_symbol = '] '
 hi Search term=bold ctermbg=22 ctermfg=white
 hi Error term=reverse ctermbg=52 ctermfg=white
 
+
 " ALE "
 """""""""""""
 
@@ -193,9 +196,12 @@ highlight ALEWarning ctermbg=220 ctermfg=black
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
 
+let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fix_on_save = 0
+
 
 " VIM-JSON "
 """"""""""""
