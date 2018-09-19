@@ -142,6 +142,7 @@ Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
 Plug 'p-fernandez/vim-jdaddy'
 
+
 " Initialize plugin system
 call plug#end()
 
