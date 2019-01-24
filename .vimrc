@@ -115,6 +115,9 @@ aug QFClose
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
 
+" Turn on setting the title.
+set title
+
 
 " PATHOGEN "
 """"""""""""
@@ -134,7 +137,7 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'vim-airline/vim-airline'
 Plug 'ap/vim-css-color'
-Plug 'fleischie/vim-styled-components', { 'for': 'javascript' }
+Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'airblade/vim-gitgutter'
 Plug 'brooth/far.vim'
@@ -178,6 +181,7 @@ hi Error term=reverse ctermbg=52 ctermfg=white
 
 " List of errors open inside Airline extension (bottom) showing up to 3 at the
 " same time
+let g:ale_completion_enabled = 1
 let g:ale_open_list = 1
 let g:ale_set_quickfix = 0
 let g:ale_list_window_size = 3
@@ -199,6 +203,7 @@ let g:ale_sign_warning = '▵'
 
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
+let g:ale_fixers['sh'] = ['shellcheck']
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fix_on_save = 0
