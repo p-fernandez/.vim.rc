@@ -14,10 +14,6 @@ set encoding=utf-8
 set nocompatible
 set number
 
-" Folding via syntax is used for this filetype.
-set foldmethod=syntax
-set foldlevelstart=5
-
 " Performance because of ALE
 set lazyredraw
 
@@ -203,9 +199,10 @@ let g:ale_sign_warning = '▵'
 
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
-let g:ale_fixers['sh'] = ['shellcheck']
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
+let g:ale_fixers['sh'] = ['shellcheck']
+let g:ale_fixers['vim'] = ['vint']
 let g:ale_fix_on_save = 0
 
 
