@@ -1,35 +1,38 @@
+"""""""""""""""
 " COLORSCHEME "
 """""""""""""""
 
 set t_Co=256
 colorscheme afterglow
-" Search color highlighting
-set hlsearch
 
 
-" GENERAL "
+"""""""""""
+" OPTIONS "
 """""""""""
 
-set encoding=utf-8
+set autoindent " Carry over indenting from previous line
+set backspace=indent,eol,start " Allow backspacing over everything in insert mode
+set clipboard=unnamed " Copy to MacOSx clipboard
+set encoding=utf8
+set history=50 " keep 50 lines of command line history
+set hlsearch " Hilight searching
+set incsearch	" do incremental searching
+set lazyredraw " Performance because of ALE
+set linebreak " Break long lines by word, not char
 set nocompatible
 set number
-
-" Performance because of ALE
-set lazyredraw
-
-" Convert tab into spaces
-set tabstop=2 shiftwidth=2 expandtab
-
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
+set ruler " show the cursor position all the time
 set showcmd		" display incomplete commands
-set wildmenu		" display completion matches in a status line
-set incsearch		" do incremental searching
+set title " Turn on setting the title.
+set tabstop=2 shiftwidth=2 expandtab " Convert tab into spaces
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
+set wildmenu		" display completion matches in a status line
+
+
+"""""""""""
+" GENERAL "
+"""""""""""
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -43,8 +46,6 @@ if has('mouse')
   set mouse=a
 endif
 
-" Copy to MacOSx clipboard
-set clipboard=unnamed
 
 " Pastetoggle
 " Code from:
@@ -111,16 +112,18 @@ aug QFClose
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
 
-" Turn on setting the title.
-set title
+" Modify readonly files from Vim
+ cnoremap w!! w !sudo tee > /dev/null %
 
 
+""""""""""""
 " PATHOGEN "
 """"""""""""
 
 execute pathogen#infect()
 
 
+""""""""
 " PLUG "
 """"""""
 
@@ -136,16 +139,18 @@ Plug 'ap/vim-css-color'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'airblade/vim-gitgutter'
-Plug 'brooth/far.vim'
 Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
 Plug 'p-fernandez/vim-jdaddy'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 
 " Initialize plugin system
 call plug#end()
 
 
+"""""""""""
 " AIRLINE "
 """""""""""
 
@@ -172,8 +177,9 @@ hi Search term=bold ctermbg=22 ctermfg=white
 hi Error term=reverse ctermbg=52 ctermfg=white
 
 
+"""""""
 " ALE "
-"""""""""""""
+"""""""
 
 " List of errors open inside Airline extension (bottom) showing up to 3 at the
 " same time
@@ -206,6 +212,30 @@ let g:ale_fixers['vim'] = ['vint']
 let g:ale_fix_on_save = 0
 
 
+""""""""""""""
+" GIT-GUTTER "
+""""""""""""""
+
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+
+" GitGutter styling to use · instead of +/-
+let g:gitgutter_sign_added = '●'
+let g:gitgutter_sign_modified = '●'
+let g:gitgutter_sign_removed = '●'
+let g:gitgutter_sign_modified_removed = '●'
+
+let g:gitgutter_override_sign_column_highlight = 0
+highlight clear SignColumn
+highlight GitGutterAdd    guifg=#00cc00 guibg=#000000 ctermfg=2 ctermbg=0
+highlight GitGutterChange guifg=#bbbb00 guibg=#000000 ctermfg=3 ctermbg=0
+highlight GitGutterChangeDelete guifg=#cc2200 guibg=#000000 ctermfg=1 ctermbg=0
+highlight GitGutterDelete guifg=#cc2200 guibg=#000000 ctermfg=1 ctermbg=0
+
+""""""""""""
 " VIM-JSON "
 """"""""""""
 
@@ -213,6 +243,7 @@ let g:ale_fix_on_save = 0
 let g:vim_json_syntax_conceal = 0
 
 
+""""""""""""""
 " VIM-JDADDY "
 """"""""""""""
 
@@ -227,14 +258,3 @@ function! JsonStringify ()
 endfunction
 
 command! JsonStringify call JsonStringify()
-
-
-" INDENT "
-""""""""""
-
-" set noautoindent
-" set nocindent
-" set nosmartindent
-
-filetype indent on
-set autoindent
