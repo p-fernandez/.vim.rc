@@ -172,9 +172,6 @@ let airline#extensions#ale#error_symbol = ' ✕ -> '
 let airline#extensions#ale#warning_symbol = ' ▵ -> '
 let airline#extensions#ale#open_lnum_symbol = ' ['
 let airline#extensions#ale#close_lnum_symbol = '] '
-" Highlighting search
-hi Search term=bold ctermbg=22 ctermfg=white
-hi Error term=reverse ctermbg=52 ctermfg=white
 
 
 """""""
@@ -186,9 +183,10 @@ hi Error term=reverse ctermbg=52 ctermfg=white
 let g:ale_completion_enabled = 1
 let g:ale_open_list = 1
 let g:ale_set_quickfix = 0
-let g:ale_list_window_size = 3
+let g:ale_list_window_size = 100
+let g:ale_list_vertical = 1 
 " Delay the checking
-let g:ale_lint_delay = 1000
+let g:ale_lint_delay = 500
 " Left column closed when no errors
 let g:ale_sign_column_always = 0
 " Highlights
