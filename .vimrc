@@ -14,13 +14,15 @@ set autoindent " Carry over indenting from previous line
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set clipboard=unnamed " Copy to MacOSx clipboard
 set encoding=utf8
-set history=50 " keep 50 lines of command line history
+set history=10 " keep 50 lines of command line history
 set hlsearch " Hilight searching
 set incsearch	" do incremental searching
 set lazyredraw " Performance because of ALE
 set linebreak " Break long lines by word, not char
 set nocompatible
-set number
+set number " Sets number of the line.
+set relativenumber " Combined with set number shows the relative position of
+" other lines respect cursor current one
 set ruler " show the cursor position all the time
 set showcmd		" display incomplete commands
 set title " Turn on setting the title.
@@ -113,7 +115,13 @@ aug QFClose
 aug END
 
 " Modify readonly files from Vim
- cnoremap w!! w !sudo tee > /dev/null %
+cnoremap w!! w !sudo tee > /dev/null %
+
+" Update .vimrc config on the fly after saving to the current window
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') && filereadable($MYGVIMRC) | so $MYGVIMRC | endif
+augroup END
 
 
 """"""""""""
@@ -191,12 +199,12 @@ let g:ale_lint_delay = 500
 let g:ale_sign_column_always = 0
 " Highlights
 let g:ale_set_highlights = 1
-highlight ALEErrorLine ctermbg=52 ctermfg=white
-highlight ALEErrorSign ctermbg=52 ctermfg=white
-highlight ALEError ctermbg=88 ctermfg=white
-highlight ALEWarningLine ctermbg=178 ctermfg=black
-highlight ALEWarningSign ctermbg=178 ctermfg=black
-highlight ALEWarning ctermbg=220 ctermfg=black
+highlight ALEErrorLine ctermbg=1 ctermfg=white
+highlight ALEErrorSign ctermfg=1
+highlight ALEError ctermbg=52 ctermfg=white
+highlight ALEWarningLine ctermbg=220 ctermfg=black
+highlight ALEWarningSign ctermfg=220
+highlight ALEWarning ctermbg=178 ctermfg=black
 " Signs
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
@@ -227,11 +235,11 @@ let g:gitgutter_sign_removed = '●'
 let g:gitgutter_sign_modified_removed = '●'
 
 let g:gitgutter_override_sign_column_highlight = 0
-highlight clear SignColumn
-highlight GitGutterAdd    guifg=#00cc00 guibg=#000000 ctermfg=2 ctermbg=0
-highlight GitGutterChange guifg=#bbbb00 guibg=#000000 ctermfg=3 ctermbg=0
-highlight GitGutterChangeDelete guifg=#cc2200 guibg=#000000 ctermfg=1 ctermbg=0
-highlight GitGutterDelete guifg=#cc2200 guibg=#000000 ctermfg=1 ctermbg=0
+"highlight clear SignColumn
+highlight GitGutterAdd guifg=#008000 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterChangeDelete guifg=#800000 ctermfg=1
+highlight GitGutterDelete guifg=#800000 ctermfg=1
 
 """"""""""""
 " VIM-JSON "
