@@ -152,6 +152,7 @@ Plug 'elzr/vim-json'
 Plug 'p-fernandez/vim-jdaddy'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'Kuniwak/vint'
 
 
 " Initialize plugin system
@@ -212,6 +213,9 @@ let g:ale_sign_warning = '▵'
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['html'] = ['prettier']
+let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fixers['sh'] = ['shellcheck']
 let g:ale_fixers['vim'] = ['vint']
