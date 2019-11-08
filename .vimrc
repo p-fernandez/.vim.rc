@@ -213,6 +213,7 @@ let g:ale_sign_warning = '▵'
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['json'] = ['jsonlint']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['html'] = ['prettier']
 let g:ale_fixers['jsx'] = ['prettier']
