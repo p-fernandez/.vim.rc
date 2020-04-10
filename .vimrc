@@ -13,6 +13,7 @@ colorscheme afterglow
 set autoindent " Carry over indenting from previous line
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set clipboard=unnamed " Copy to MacOSx clipboard
+set cursorline
 set encoding=utf8
 set history=10 " keep 50 lines of command line history
 set hlsearch " Hilight searching
@@ -20,6 +21,7 @@ set incsearch	" do incremental searching
 set lazyredraw " Performance because of ALE
 set linebreak " Break long lines by word, not char
 set nocompatible
+set nospell " Disables spelling checking
 set number " Sets number of the line.
 set relativenumber " Combined with set number shows the relative position of
 " other lines respect cursor current one
