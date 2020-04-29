@@ -156,7 +156,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Kuniwak/vint'
 
-
 " Initialize plugin system
 call plug#end()
 
@@ -222,6 +221,8 @@ let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fixers['sh'] = ['shellcheck']
 let g:ale_fixers['vim'] = ['vint']
+let g:ale_fixers['yaml'] = ['swaglint']
+let g:ale_fixers['yml'] = ['swaglint']
 let g:ale_fix_on_save = 0
 
 
