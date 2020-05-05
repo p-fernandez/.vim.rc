@@ -153,7 +153,6 @@ Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
 Plug 'p-fernandez/vim-jdaddy'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'Kuniwak/vint'
 
 " Initialize plugin system
