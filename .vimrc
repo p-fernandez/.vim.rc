@@ -23,6 +23,7 @@ set linebreak " Break long lines by word, not char
 set nocompatible
 set nospell " Disables spelling checking
 set number " Sets number of the line.
+set path+=** " Makes search find recursive
 set relativenumber " Combined with set number shows the relative position of
 " other lines respect cursor current one
 set ruler " show the cursor position all the time
@@ -31,12 +32,23 @@ set title " Turn on setting the title.
 set tabstop=2 shiftwidth=2 expandtab " Convert tab into spaces
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
+set wildignore+=**/node_modules/** " folders to ignore when using :find
 set wildmenu		" display completion matches in a status line
+
+" https://youtu.be/XA2WjJbmmoM?t=368
+syntax enable
+filetype plugin on
 
 
 """""""""""
 " GENERAL "
 """""""""""
+
+" Update .vimrc config on the fly after saving to the current window
+autocmd! bufwritepost .vimrc source %
+
+" Create tags
+command! MakeTags !ctags -R .
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -119,12 +131,6 @@ aug END
 " Modify readonly files from Vim
 cnoremap w!! w !sudo tee > /dev/null %
 
-" Update .vimrc config on the fly after saving to the current window
-augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') && filereadable($MYGVIMRC) | so $MYGVIMRC | endif
-augroup END
-
 
 """"""""""""
 " PATHOGEN "
@@ -152,7 +158,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
 Plug 'p-fernandez/vim-jdaddy'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'Kuniwak/vint'
 
 " Initialize plugin system
