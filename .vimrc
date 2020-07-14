@@ -1,11 +1,3 @@
-"""""""""""""""
-" COLORSCHEME "
-"""""""""""""""
-
-set t_Co=256
-colorscheme afterglow
-
-
 """""""""""
 " OPTIONS "
 """""""""""
@@ -28,6 +20,7 @@ set relativenumber " Combined with set number shows the relative position of
 " other lines respect cursor current one
 set ruler " show the cursor position all the time
 set showcmd		" display incomplete commands
+set t_Co=256
 set title " Turn on setting the title.
 set tabstop=2 shiftwidth=2 expandtab " Convert tab into spaces
 set ttimeout		" time out for key codes
@@ -132,13 +125,6 @@ aug END
 cnoremap w!! w !sudo tee > /dev/null %
 
 
-""""""""""""
-" PATHOGEN "
-""""""""""""
-
-execute pathogen#infect()
-
-
 """"""""
 " PLUG "
 """"""""
@@ -161,6 +147,12 @@ Plug 'p-fernandez/vim-jdaddy'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Kuniwak/vint'
+Plug 'morhetz/gruvbox'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'whatyouhide/vim-gotham'
+Plug 'arcticicestudio/nord-vim'
+Plug 'jacoborus/tender.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -256,6 +248,7 @@ highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterChangeDelete guifg=#800000 ctermfg=1
 highlight GitGutterDelete guifg=#800000 ctermfg=1
 
+
 """"""""""""
 " VIM-JSON "
 """"""""""""
@@ -279,3 +272,10 @@ function! JsonStringify ()
 endfunction
 
 command! JsonStringify call JsonStringify()
+
+
+"""""""""""""""
+" COLORSCHEME "
+"""""""""""""""
+
+colorscheme gotham256
