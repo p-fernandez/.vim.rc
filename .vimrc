@@ -211,7 +211,8 @@ let g:ale_sign_warning = '▵'
 
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_linters_ignore = {}
+let g:ale_fixers['javascript'] = ['prettier', 'flow']
 let g:ale_fixers['json'] = ['jsonlint']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['html'] = ['prettier']
@@ -221,6 +222,7 @@ let g:ale_fixers['sh'] = ['shellcheck']
 let g:ale_fixers['vim'] = ['vint']
 let g:ale_fixers['yaml'] = ['swaglint']
 let g:ale_fixers['yml'] = ['swaglint']
+let g:ale_linters_ignore['javascript'] = ['tsserver']
 let g:ale_fix_on_save = 0
 
 
