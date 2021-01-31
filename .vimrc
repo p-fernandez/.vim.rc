@@ -37,9 +37,6 @@ filetype plugin on
 " GENERAL "
 """""""""""
 
-" Update .vimrc config on the fly after saving to the current window
-autocmd! bufwritepost .vimrc source %
-
 " Create tags
 command! MakeTags !ctags -R .
 
@@ -124,6 +121,10 @@ aug END
 " Modify readonly files from Vim
 cnoremap w!! w !sudo tee > /dev/null %
 
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
 
 """"""""
 " PLUG "
@@ -148,6 +149,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Kuniwak/vint'
 Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'whatyouhide/vim-gotham'
