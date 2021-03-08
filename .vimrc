@@ -16,8 +16,6 @@ set nocompatible
 set nospell " Disables spelling checking
 set number " Sets number of the line.
 set path+=** " Makes search find recursive
-set relativenumber " Combined with set number shows the relative position of
-" other lines respect cursor current one
 set ruler " show the cursor position all the time
 set showcmd		" display incomplete commands
 set t_Co=256
@@ -37,6 +35,11 @@ filetype plugin on
 " GENERAL "
 """""""""""
 
+" Relative numbers only in Normal Mode.
+augroup toggle_relative_number
+autocmd InsertEnter * :setlocal norelativenumber
+autocmd InsertLeave * :setlocal relativenumber
+ 
 " Create tags
 command! MakeTags !ctags -R .
 
@@ -126,39 +129,6 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-""""""""
-" PLUG "
-""""""""
-
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-call plug#begin('~/.vim/plugged')
-
-" Plugins installed
-Plug 'will133/vim-dirdiff'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'vim-airline/vim-airline'
-Plug 'ap/vim-css-color'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript' }
-Plug 'hail2u/vim-css3-syntax'
-Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
-Plug 'elzr/vim-json'
-Plug 'p-fernandez/vim-jdaddy'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'Kuniwak/vint'
-Plug 'morhetz/gruvbox'
-Plug 'ryanoasis/vim-devicons'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'whatyouhide/vim-gotham'
-Plug 'arcticicestudio/nord-vim'
-Plug 'jacoborus/tender.vim'
-
-" Initialize plugin system
-call plug#end()
-
 
 """""""""""
 " AIRLINE "
@@ -190,11 +160,13 @@ let airline#extensions#ale#close_lnum_symbol = '] '
 
 " List of errors open inside Airline extension (bottom) showing up to 3 at the
 " same time
+set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
 let g:ale_open_list = 1
 let g:ale_set_quickfix = 0
-let g:ale_list_window_size = 100
-let g:ale_list_vertical = 1 
+let g:ale_list_window_size = 5
+let g:ale_list_vertical = 0 
 " Delay the checking
 let g:ale_lint_delay = 500
 " Left column closed when no errors
@@ -212,7 +184,9 @@ let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
 
 let g:ale_php_phpcs_standard= 'PSR12'
+let g:ale_fix_on_save = 0
 let g:ale_fixers = {}
+let g:ale_linters = {}
 let g:ale_linters_ignore = {}
 let g:ale_fixers['javascript'] = ['prettier', 'flow']
 let g:ale_fixers['json'] = ['jsonlint']
@@ -222,10 +196,47 @@ let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fixers['sh'] = ['shellcheck']
 let g:ale_fixers['vim'] = ['vint']
-let g:ale_fixers['yaml'] = ['swaglint']
-let g:ale_fixers['yml'] = ['swaglint']
+let g:ale_fixers['yaml'] = ['yamllint']
+let g:ale_fixers['yml'] = ['yamllint']
+let g:ale_fixers['rust'] = ['rustfmt', 'rls']
+let g:ale_linters['rust'] = ['rustfmt', 'rls']
 let g:ale_linters_ignore['javascript'] = ['tsserver']
-let g:ale_fix_on_save = 0
+
+
+""""""""
+" PLUG "
+""""""""
+
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
+
+" Plugins installed
+Plug 'will133/vim-dirdiff'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'vim-airline/vim-airline'
+Plug 'ap/vim-css-color'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript' }
+Plug 'hail2u/vim-css3-syntax'
+Plug 'airblade/vim-gitgutter'
+Plug 'dense-analysis/ale'
+Plug 'elzr/vim-json'
+Plug 'p-fernandez/vim-jdaddy'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'Kuniwak/vint'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'whatyouhide/vim-gotham'
+Plug 'arcticicestudio/nord-vim'
+Plug 'jacoborus/tender.vim'
+Plug 'cespare/vim-toml'
+
+
+" Initialize plugin system
+call plug#end()
 
 
 """"""""""""""
