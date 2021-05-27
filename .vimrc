@@ -6,6 +6,7 @@ set autoindent " Carry over indenting from previous line
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set clipboard=unnamed " Copy to MacOSx clipboard
 set cursorline
+set directory=$HOME/.vim/swp// " No annoying swap files in the projects. This absolute link them to reference them inside said directory.
 set encoding=utf8
 set history=10 " keep 50 lines of command line history
 set hlsearch " Hilight searching
