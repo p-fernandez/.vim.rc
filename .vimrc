@@ -165,6 +165,8 @@ set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_open_list = 1
+" Run only linters you've explicitly configured. 0 = Disabled.
+let g:ale_linters_explicit = 0
 let g:ale_set_quickfix = 0
 let g:ale_list_window_size = 5
 let g:ale_list_vertical = 0 
@@ -172,6 +174,7 @@ let g:ale_list_vertical = 0
 let g:ale_lint_delay = 500
 " Left column closed when no errors
 let g:ale_sign_column_always = 0
+let g:ale_fix_on_save = 1
 " Highlights
 let g:ale_set_highlights = 1
 highlight ALEErrorLine ctermbg=1 ctermfg=white
@@ -185,7 +188,6 @@ let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
 
 let g:ale_php_phpcs_standard= 'PSR12'
-let g:ale_fix_on_save = 0
 let g:ale_fixers = {}
 let g:ale_linters = {}
 let g:ale_linters_ignore = {}
@@ -196,12 +198,14 @@ let g:ale_fixers['html'] = ['prettier']
 let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fixers['sh'] = ['shellcheck']
-let g:ale_fixers['vim'] = ['vint']
 let g:ale_fixers['yaml'] = ['yamllint']
 let g:ale_fixers['yml'] = ['yamllint']
 let g:ale_fixers['rust'] = ['rustfmt', 'rls']
 let g:ale_linters['rust'] = ['rustfmt', 'rls']
+let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_linters_ignore['javascript'] = ['tsserver']
+let g:ale_linters_ignore['yaml'] = ['spectral']
+let g:ale_linters_ignore['yml'] = ['spectral']
 
 
 """"""""
