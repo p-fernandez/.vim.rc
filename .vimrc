@@ -11,6 +11,7 @@ set encoding=utf8
 set history=10 " keep 50 lines of command line history
 set hlsearch " Hilight searching
 set incsearch	" do incremental searching
+set infercase " Autocomplete in Vim
 set lazyredraw " Performance because of ALE
 set linebreak " Break long lines by word, not char
 set nocompatible
@@ -25,7 +26,7 @@ set tabstop=2 shiftwidth=2 expandtab " Convert tab into spaces
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 set wildignore+=**/node_modules/** " folders to ignore when using :find
-set wildmenu		" display completion matches in a status line
+set wildmode=full wildmenu		" display completion matches in a status line
 
 " https://youtu.be/XA2WjJbmmoM?t=368
 syntax enable
@@ -129,6 +130,22 @@ cnoremap w!! w !sudo tee > /dev/null %
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Improve Vim's Command Line Autocompletion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set completeopt=menuone,noinsert,longest,preview
+
+set wildignore+=*.o,*.obj,*.pyc,*.pyo,*.DS_STORE,*.db,*.swc,*.rbc " Binary objects
+set wildignore+=__pycache__
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip                    " Temp files
+set wildignore+=vendor/rails/**,vendor/gems/**              " Rails stuff
+set wildignore+=*.jar,*.class,*.log,*.gz                    " Java bin files
+set wildignore+=.git,*.rbc,*.svn
+set wildignore+=*.jpeg,*.jpg,*.jpeg*,*.png,*.gif            " Media files
+set wildignore+=*/log/*,*/.bundle/*,*/bin/*,*/tmp/*,*/build/*
+set wildignore+=*/.sass-cache/*
+
 
 
 """""""""""
