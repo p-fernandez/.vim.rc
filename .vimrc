@@ -204,25 +204,35 @@ highlight ALEWarning ctermbg=178 ctermfg=black
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '▵'
 
+augroup FiletypeGroup
+  autocmd!
+  au BufNewFile,BufRead *.gql set filetype=graphql
+  au BufNewFile,BufRead *.graphql set filetype=graphql
+augroup END
+
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
 let g:ale_linters = {}
 let g:ale_linters_ignore = {}
-let g:ale_fixers['javascript'] = ['prettier', 'flow']
-let g:ale_fixers['json'] = ['jsonlint']
 let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['graphql'] = ['gqlint']
 let g:ale_fixers['html'] = ['prettier']
+let g:ale_fixers['javascript'] = ['prettier', 'flow']
+let g:ale_fixers['json'] = ['jq']
 let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
+let g:ale_fixers['rust'] = ['rustfmt', 'rls']
 let g:ale_fixers['sh'] = ['shellcheck']
+let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['yaml'] = ['yamlfix']
 let g:ale_fixers['yml'] = ['yamlfix']
-let g:ale_fixers['rust'] = ['rustfmt', 'rls']
+let g:ale_linters['graphql'] = ['eslint', 'gqlint']
+let g:ale_linters['json'] = ['jq']
 let g:ale_linters['rust'] = ['rustfmt', 'rls']
-let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_linters['vim'] = ['vint']
+let g:ale_linters['yaml'] = ['circleci', 'spectral', 'yamllint']
+let g:ale_linters['yml'] = ['circleci', 'spectral', 'yamllint']
 let g:ale_linters_ignore['javascript'] = ['tsserver']
-let g:ale_linters_ignore['yaml'] = ['spectral']
-let g:ale_linters_ignore['yml'] = ['spectral']
 
 
 """"""""
@@ -255,6 +265,7 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'arcticicestudio/nord-vim'
 Plug 'jacoborus/tender.vim'
 Plug 'cespare/vim-toml'
+Plug 'stedolan/jq'
 
 
 " Initialize plugin system
