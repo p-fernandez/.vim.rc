@@ -2,27 +2,34 @@
 " OPTIONS "
 """""""""""
 
-set autoindent " Carry over indenting from previous line
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set clipboard=unnamed " Copy to MacOSx clipboard
+set colorcolumn=80
+set cursorcolumn
 set cursorline
 set directory=$HOME/.vim/swp// " No annoying swap files in the projects. This absolute link them to reference them inside said directory.
 set encoding=utf8
-set history=10 " keep 50 lines of command line history
+set guicursor=n-c-v:block-nCursor
+set hidden " keep buffers open
+set history=50 " keep 50 lines of command line history
 set hlsearch " Hilight searching
 set incsearch	" do incremental searching
 set infercase " Autocomplete in Vim
 set lazyredraw " Performance because of ALE
-set linebreak " Break long lines by word, not char
 set nocompatible
+set noerrorbells
 set nospell " Disables spelling checking
+set nowrap
 set number " Sets number of the line.
 set path+=** " Makes search find recursive
 set ruler " show the cursor position all the time
-set showcmd		" display incomplete commands
+set scrolloff=8
+set noshowcmd		" display incomplete commands
 set t_Co=256
 set title " Turn on setting the title.
-set tabstop=2 shiftwidth=2 expandtab " Convert tab into spaces
+set signcolumn=yes
+set smartindent
+set softtabstop=2 shiftwidth=2 expandtab " Convert tab into spaces
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 set wildignore+=**/node_modules/** " folders to ignore when using :find
@@ -107,6 +114,8 @@ endif
 if !isdirectory($HOME."/.vim/undodir")
     call mkdir($HOME."/.vim/undodir", "", 0700)
 endif
+set noswapfile
+set nobackup
 set undodir=~/.vim/undodir
 set undofile
 
@@ -127,9 +136,7 @@ aug END
 cnoremap w!! w !sudo tee > /dev/null %
 
 " Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $MYVIMRC"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Improve Vim's Command Line Autocompletion
@@ -327,3 +334,6 @@ command! JsonStringify call JsonStringify()
 """""""""""""""
 
 colorscheme gotham256
+
+" Background highlight
+highlight Normal guibg=NONE
