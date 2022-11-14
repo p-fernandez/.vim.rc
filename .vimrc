@@ -9,6 +9,7 @@ set cursorcolumn
 set cursorline
 set directory=$HOME/.vim/swp// " No annoying swap files in the projects. This absolute link them to reference them inside said directory.
 set encoding=utf8
+set fileencoding=utf8
 set guicursor=n-c-v:block-nCursor
 set hidden " keep buffers open
 set history=50 " keep 50 lines of command line history
@@ -150,97 +151,8 @@ set wildignore+=vendor/rails/**,vendor/gems/**              " Rails stuff
 set wildignore+=*.jar,*.class,*.log,*.gz                    " Java bin files
 set wildignore+=.git,*.rbc,*.svn
 set wildignore+=*.jpeg,*.jpg,*.jpeg*,*.png,*.gif            " Media files
-set wildignore+=*/log/*,*/.bundle/*,*/bin/*,*/tmp/*,*/build/*
+set wildignore+=*/log/*,*/.bundle/*,*/bin/*,*/tmp/*,*/build/*,*/dist/*,*/node_modules/*
 set wildignore+=*/.sass-cache/*
-
-
-
-"""""""""""
-" AIRLINE "
-"""""""""""
-
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-hi airline_c ctermfg=white ctermbg=234
-hi airline_c_bold term=bold ctermfg=white ctermbg=234
-hi airline_x ctermfg=white ctermbg=234
-hi airline_x_bold term=bold ctermfg=white ctermbg=234
-hi airline_tabfill ctermfg=white ctermbg=234
-hi airline_tabhid ctermfg=white ctermbg=234
-hi airline_tabhid_right ctermfg=white ctermbg=234
-" Integration with ALE
-let airline#extensions#ale#error_symbol = ' ✕ -> '
-let airline#extensions#ale#warning_symbol = ' ▵ -> '
-let airline#extensions#ale#open_lnum_symbol = ' ['
-let airline#extensions#ale#close_lnum_symbol = '] '
-
-
-"""""""
-" ALE "
-"""""""
-
-" List of errors open inside Airline extension (bottom) showing up to 3 at the
-" same time
-set omnifunc=ale#completion#OmniFunc
-let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
-let g:ale_open_list = 1
-" Run only linters you've explicitly configured. 0 = Disabled.
-let g:ale_linters_explicit = 0
-let g:ale_set_quickfix = 0
-let g:ale_list_window_size = 5
-let g:ale_list_vertical = 0 
-" Delay the checking
-let g:ale_lint_delay = 500
-" Left column closed when no errors
-let g:ale_sign_column_always = 0
-let g:ale_fix_on_save = 1
-" Highlights
-let g:ale_set_highlights = 1
-highlight ALEErrorLine ctermbg=1 ctermfg=white
-highlight ALEErrorSign ctermfg=1
-highlight ALEError ctermbg=52 ctermfg=white
-highlight ALEWarningLine ctermbg=220 ctermfg=black
-highlight ALEWarningSign ctermfg=220
-highlight ALEWarning ctermbg=178 ctermfg=black
-" Signs
-let g:ale_sign_error = '✕'
-let g:ale_sign_warning = '▵'
-
-augroup FiletypeGroup
-  autocmd!
-  au BufNewFile,BufRead *.gql set filetype=graphql
-  au BufNewFile,BufRead *.graphql set filetype=graphql
-augroup END
-
-let g:ale_php_phpcs_standard= 'PSR12'
-let g:ale_fixers = {}
-let g:ale_linters = {}
-let g:ale_linters_ignore = {}
-let g:ale_fixers['css'] = ['prettier']
-let g:ale_fixers['graphql'] = ['gqlint']
-let g:ale_fixers['html'] = ['prettier']
-let g:ale_fixers['javascript'] = ['prettier', 'eslint', 'flow']
-let g:ale_fixers['json'] = ['jq']
-let g:ale_fixers['jsx'] = ['prettier']
-let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
-let g:ale_fixers['rust'] = ['rustfmt', 'rls']
-let g:ale_fixers['typescript'] = ['prettier', 'eslint']
-let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
-let g:ale_fixers['yaml'] = ['yamlfix']
-let g:ale_fixers['yml'] = ['yamlfix']
-let g:ale_linters['graphql'] = ['eslint', 'gqlint']
-let g:ale_linters['json'] = ['jq']
-let g:ale_linters['rust'] = ['rustfmt', 'rls']
-let g:ale_linters['sh'] = ['shellcheck']
-let g:ale_linters['vim'] = ['vint']
-let g:ale_linters['yaml'] = ['circleci', 'spectral', 'yamllint']
-let g:ale_linters['yml'] = ['circleci', 'spectral', 'yamllint']
-let g:ale_linters_ignore['javascript'] = ['tsserver']
 
 
 """"""""
@@ -338,3 +250,99 @@ colorscheme gotham256
 
 " Background highlight
 highlight Normal guibg=NONE
+
+
+"""""""""""
+" AIRLINE "
+"""""""""""
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+hi airline_c ctermfg=white ctermbg=234
+hi airline_c_bold term=bold ctermfg=white ctermbg=234
+hi airline_x ctermfg=white ctermbg=234
+hi airline_x_bold term=bold ctermfg=white ctermbg=234
+hi airline_tabfill ctermfg=white ctermbg=234
+hi airline_tabhid ctermfg=white ctermbg=234
+hi airline_tabhid_right ctermfg=white ctermbg=234
+" Integration with ALE
+let airline#extensions#ale#error_symbol = ' ✕ -> '
+let airline#extensions#ale#warning_symbol = ' ▵ -> '
+let airline#extensions#ale#open_lnum_symbol = ' ['
+let airline#extensions#ale#close_lnum_symbol = '] '
+
+
+"""""""""
+" ICONS "
+"""""""""
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+
+
+"""""""
+" ALE "
+"""""""
+
+" List of errors open inside Airline extension (bottom) showing up to 3 at the
+" same time
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_open_list = 1
+" Run only linters you've explicitly configured. 0 = Disabled.
+let g:ale_linters_explicit = 0
+let g:ale_set_quickfix = 0
+let g:ale_list_window_size = 5
+let g:ale_list_vertical = 0 
+" Delay the checking
+let g:ale_lint_delay = 500
+" Left column closed when no errors
+let g:ale_sign_column_always = 0
+let g:ale_fix_on_save = 1
+" Highlights
+let g:ale_set_highlights = 1
+highlight ALEErrorLine ctermbg=1 ctermfg=white
+highlight ALEErrorSign ctermfg=1
+highlight ALEError ctermbg=52 ctermfg=white
+highlight ALEWarningLine ctermbg=220 ctermfg=black
+highlight ALEWarningSign ctermfg=220
+highlight ALEWarning ctermbg=178 ctermfg=black
+" Signs
+let g:ale_sign_error = '✕'
+let g:ale_sign_warning = '▵'
+
+augroup FiletypeGroup
+  autocmd!
+  au BufNewFile,BufRead *.gql set filetype=graphql
+  au BufNewFile,BufRead *.graphql set filetype=graphql
+augroup END
+
+let g:ale_php_phpcs_standard= 'PSR12'
+let g:ale_fixers = {}
+let g:ale_linters = {}
+let g:ale_linters_ignore = {}
+let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['graphql'] = ['gqlint']
+let g:ale_fixers['html'] = ['prettier']
+let g:ale_fixers['javascript'] = ['prettier', 'eslint', 'flow']
+let g:ale_fixers['json'] = ['jq']
+let g:ale_fixers['jsx'] = ['prettier']
+let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
+let g:ale_fixers['rust'] = ['rustfmt', 'rls']
+let g:ale_fixers['typescript'] = ['prettier', 'eslint']
+let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
+let g:ale_fixers['yaml'] = ['yamlfix']
+let g:ale_fixers['yml'] = ['yamlfix']
+let g:ale_linters['graphql'] = ['eslint', 'gqlint']
+let g:ale_linters['json'] = ['jq']
+let g:ale_linters['rust'] = ['rustfmt', 'rls']
+let g:ale_linters['sh'] = ['shellcheck']
+let g:ale_linters['vim'] = ['vint']
+let g:ale_linters['yaml'] = ['circleci', 'spectral', 'yamllint']
+let g:ale_linters['yml'] = ['circleci', 'spectral', 'yamllint']
+let g:ale_linters_ignore['javascript'] = ['tsserver']
