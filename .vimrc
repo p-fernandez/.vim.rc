@@ -186,7 +186,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'jacoborus/tender.vim'
 Plug 'cespare/vim-toml'
 Plug 'stedolan/jq'
-
+Plug 'fatih/vim-go'
 
 " Initialize plugin system
 call plug#end()
@@ -322,11 +322,16 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.graphql set filetype=graphql
 augroup END
 
+" Go
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
 let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
 let g:ale_linters = {}
 let g:ale_linters_ignore = {}
 let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['go'] = ['gofmt', 'gopls']
 let g:ale_fixers['graphql'] = ['gqlint']
 let g:ale_fixers['html'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']
@@ -338,9 +343,11 @@ let g:ale_fixers['typescript'] = ['prettier', 'eslint']
 let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_fixers['yaml'] = ['yamlfix']
 let g:ale_fixers['yml'] = ['yamlfix']
+let g:ale_linters['go'] = ['golangci-lint', 'gobuild', 'golangserver', 'gofmt', 'gopls', 'govert']
 let g:ale_linters['graphql'] = ['eslint', 'gqlint']
-let g:ale_linters['javascript'] = ['eslint']
+let g:ale_linters['javascript'] = ['eslint', 'prettier']
 let g:ale_linters['json'] = ['jq']
+let g:ale_linters['jsx'] = ['prettier', 'eslint']
 let g:ale_linters['rust'] = ['rustfmt', 'rls']
 let g:ale_linters['sh'] = ['shellcheck']
 let g:ale_linters['vim'] = ['vint']
