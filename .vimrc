@@ -169,7 +169,6 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'vim-airline/vim-airline'
 Plug 'ap/vim-css-color'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript' }
-Plug 'hail2u/vim-css3-syntax'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'elzr/vim-json'
@@ -288,6 +287,7 @@ let g:webdevicons_enable_airline_statusline = 1
 " ALE "
 """""""
 
+let g:ale_history_log_output = 1
 " List of errors open inside Airline extension (bottom) showing up to 3 at the
 " same time
 set omnifunc=ale#completion#OmniFunc
@@ -330,24 +330,26 @@ let g:ale_php_phpcs_standard= 'PSR12'
 let g:ale_fixers = {}
 let g:ale_linters = {}
 let g:ale_linters_ignore = {}
-let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['css'] = ['stylelint']
 let g:ale_fixers['go'] = ['gofmt', 'gopls']
 let g:ale_fixers['graphql'] = ['gqlint']
 let g:ale_fixers['html'] = ['prettier']
-let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['json'] = ['jq']
-let g:ale_fixers['jsx'] = ['prettier', 'eslint']
+let g:ale_fixers['jsx'] = ['prettier']
 let g:ale_fixers['php'] = ['phpcbf', 'phpstan']
 let g:ale_fixers['rust'] = ['rustfmt', 'rls']
-let g:ale_fixers['typescript'] = ['prettier', 'eslint']
-let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
+let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['typescriptreact'] = ['prettier']
 let g:ale_fixers['yaml'] = ['yamlfix']
 let g:ale_fixers['yml'] = ['yamlfix']
+let g:ale_linters['css'] = ['stylelint', 'eslint']
 let g:ale_linters['go'] = ['golangci-lint', 'gobuild', 'golangserver', 'gofmt', 'gopls', 'govert']
 let g:ale_linters['graphql'] = ['eslint', 'gqlint']
-let g:ale_linters['javascript'] = ['eslint', 'prettier']
+let g:ale_linters['html'] = ['tidy', 'stylelint']
+let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['json'] = ['jq']
-let g:ale_linters['jsx'] = ['prettier', 'eslint']
+let g:ale_linters['jsx'] = ['eslint']
 let g:ale_linters['rust'] = ['rustfmt', 'rls']
 let g:ale_linters['sh'] = ['shellcheck']
 let g:ale_linters['vim'] = ['vint']
