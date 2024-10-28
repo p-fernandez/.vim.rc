@@ -356,3 +356,14 @@ let g:ale_linters['vim'] = ['vint']
 let g:ale_linters['yaml'] = ['circleci', 'spectral', 'yamllint']
 let g:ale_linters['yml'] = ['circleci', 'spectral', 'yamllint']
 let g:ale_linters_ignore['javascript'] = ['flow']
+
+
+""""""""""""
+" DISCIPLINE
+""""""""""""
+
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+
