@@ -252,7 +252,7 @@ command! JsonStringify call JsonStringify()
 " COLORSCHEME "
 """""""""""""""
 
-colorscheme gotham256
+colorscheme onehalfdark
 
 " Background highlight
 highlight Normal guibg=NONE
